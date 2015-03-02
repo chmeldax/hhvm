@@ -1282,7 +1282,7 @@ bool PDOMySqlStatement::nextRowset() {
     return false;
   }
 
-   my_ulonglong affected_count;
+  my_ulonglong affected_count;
   if (!m_conn->buffered()) {
     m_result = mysql_use_result(m_server);
     affected_count = 0;
@@ -1293,12 +1293,18 @@ bool PDOMySqlStatement::nextRowset() {
       return false;
     }
   }
-  row_count = affected_count;
 
   if (!m_result) {
-    return true;
+    if (mysql_errno(m_server)) {
+      handleError(__FILE__, __LINE__);
+      return false;
+    } else {
+      /* DML queries */
+      return true;
+    }
   }
 
+  row_count = affected_count;
   column_count = (int)mysql_num_fields(m_result);
   m_fields = mysql_fetch_fields(m_result);
   return true;
