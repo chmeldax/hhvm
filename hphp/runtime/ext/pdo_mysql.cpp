@@ -1295,7 +1295,8 @@ bool PDOMySqlStatement::nextRowset() {
       return false;
     }
   }
-
+  row_count = affected_count;
+  
   if (!m_result) {
     if (mysql_errno(m_server)) {
       handleError(__FILE__, __LINE__);
@@ -1305,8 +1306,7 @@ bool PDOMySqlStatement::nextRowset() {
       return true;
     }
   }
-
-  row_count = affected_count;
+  
   column_count = (int)mysql_num_fields(m_result);
   m_fields = mysql_fetch_fields(m_result);
   return true;
