@@ -79,23 +79,3 @@ try {
   );
   var_dump(true);
 } catch (Exception $ex) { }
-
-// --------------------------------
-// PDOStatement::nextRowset() for DML.
-// --------------------------------
-$pdo = new PDO("mysql:dbname=$db;host=$host", $user, $passwd);
-
-try {
-    $pdo->query("CREATE TABLE test_mysql_errcode (
-    id INT(1),
-    PRIMARY KEY(id)
-  )");
-
-    $pdo->query("INSERT INTO test_mysql_errcode (id) VALUES (1)");
-    $pdo->query("INSERT INTO test_mysql_errcode (id) VALUES (1)"); // Dupl entry
-
-} catch (PDOException $e) {
-    var_dump($e->getCode() == $e->errorInfo[0]);
-} finally {
-    $pdo->query("DROP TABLE test_mysql_errcode");
-}
