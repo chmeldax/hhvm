@@ -14,8 +14,8 @@ try {
   )");
 
   $stm = $pdo->query("INSERT INTO test_nextrowset (id) VALUES (1);
-               INSERT INTO test_nextrowset (id) VALUES ((2), (3));
-               INSERT INTO test_nextrowset (id) VALUES ((4), (5), (6))");
+               INSERT INTO test_nextrowset (id) VALUES (2), (3);
+               INSERT INTO test_nextrowset (id) VALUES (4), (5), (6)");
   for ($i = 0; $i < 3; $i++) {
       var_dump($stm->rowCount());
       var_dump($stm->nextRowset());
