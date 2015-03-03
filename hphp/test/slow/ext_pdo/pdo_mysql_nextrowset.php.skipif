@@ -1,0 +1,5 @@
+<?php
+$drivers = PDO::getAvailableDrivers();
+
+if (!in_array('mysql', $drivers))
+  die("Skip. Driver not found");

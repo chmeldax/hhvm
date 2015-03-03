@@ -796,7 +796,9 @@ static const char *type_to_name_native(int type) {
   switch (type) {
         PDO_MYSQL_NATIVE_TYPE_NAME(STRING)
         PDO_MYSQL_NATIVE_TYPE_NAME(VAR_STRING)
+#ifdef FIELD_TYPE_TINY
         PDO_MYSQL_NATIVE_TYPE_NAME(TINY)
+#endif
         PDO_MYSQL_NATIVE_TYPE_NAME(SHORT)
         PDO_MYSQL_NATIVE_TYPE_NAME(LONG)
         PDO_MYSQL_NATIVE_TYPE_NAME(LONGLONG)
