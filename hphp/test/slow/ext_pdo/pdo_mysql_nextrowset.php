@@ -22,6 +22,7 @@ try {
   }
 
 } catch (Exception $ex) {
+	var_dump($ex);
 } finally {
   $pdo->query("DROP TABLE test_nextrowset");
 }
